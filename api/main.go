@@ -50,6 +50,7 @@ func main() {
 
 	//WHO DATA
 	router.HandleFunc("/who", sqlite.GetAllWHO).Methods("GET")
+	router.HandleFunc("/who/{country}")
 
 	log.Fatal(http.ListenAndServe(":8888", router))
 }
