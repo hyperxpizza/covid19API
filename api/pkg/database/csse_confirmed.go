@@ -1,6 +1,7 @@
 package database
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -45,18 +46,18 @@ func (db *Database) GetAllCSSEConfirmedByState(w http.ResponseWriter, r *http.Re
 	SendDataCSSE(result, w)
 }
 
-/*
-func (db *Database) GetCSSEConfirmedByCountryAndMonth(w http.ResponseWriter, r *http.Request) {
+func (db *Database) GetTotalCSSEConfirmedByCountry(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
-	result, err := db.Query("select * from information_schema.columns where tablename=csse_confirmed and column_name like 'Jan'")
+	params := mux.Vars(r)
+	var data int
 
+	result := db.QueryRow("SELECT Mar032020 FROM csse_confirmed WHERE Country=?", params["country"])
+	err := result.Scan(&data)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	defer result.Close()
+	json.NewEncoder(w).Encode(data)
 
-	log.Println(result)
 }
-
-*/

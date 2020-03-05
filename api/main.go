@@ -40,22 +40,25 @@ func main() {
 	router.HandleFunc("/csse/confirmed", sqlite.GetAllCSSEConfirmed).Methods("GET")
 	router.HandleFunc("/csse/confirmed/{country}", sqlite.GetAllCSSEConfirmedByCountry).Methods("GET")
 	router.HandleFunc("/csse/confirmed/{state}", sqlite.GetAllCSSEConfirmedByState).Methods("GET")
-	router.HandleFunc("/csse/confirmed/{country}/2020/{month}", sqlite.GetCSSEConfirmedByCountryAndMonth).Methods("GET")
+	router.HandleFunc("/csse/confirmed/{country}/total", sqlite.GetTotalCSSEConfirmedByCountry).Methods("GET")
 
 	//Deaths
 	router.HandleFunc("/csse/deaths", sqlite.GetAllCSSEDeaths).Methods("GET")
 	router.HandleFunc("/csse/deaths/{country}", sqlite.GetAllCSSEDeathsByCountry).Methods("GET")
 	router.HandleFunc("/csse/deaths/{state}", sqlite.GetAllCSSEDeathsByState).Methods("GET")
+	router.HandleFunc("/csse/deaths/{country}/total", sqlite.GetTotalCSSEDeathsByCountry).Methods("GET")
 
 	//Recovered
 	router.HandleFunc("/csse/recovered", sqlite.GetAllCSSERecovered).Methods("GET")
 	router.HandleFunc("/csse/recovered/{country}", sqlite.GetAllCSSERecoveredByCountry).Methods("GET")
 	router.HandleFunc("/csse/recovered/{state}", sqlite.GetAllCSSERecoveredByState).Methods("GET")
+	router.HandleFunc("/csse/recovered/{country}/total", sqlite.GetTotalCSSERecoveredByCountry).Methods("GET")
 
 	//WHO DATA
 	router.HandleFunc("/who", sqlite.GetAllWHO).Methods("GET")
 	router.HandleFunc("/who/{country}", sqlite.GetAllWHOByCountry).Methods("GET")
 	router.HandleFunc("/who/{state}", sqlite.GetALLWHOByState).Methods("GET")
+	router.HandleFunc("/who/{country}/total", sqlite.GetTotalWHOByCountry).Methods("GET")
 
 	log.Println("Server running at localhost:8888")
 	log.Fatal(http.ListenAndServe(":8888", router))
